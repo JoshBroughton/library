@@ -14,18 +14,38 @@ function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
 
-let theHobbit = new Book("The Hobbit", "JRR Tolkien", "295", "read")
-let endersGame = new Book("Ender's Game", "Orson Scott Card", "324", "read")
-let bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", "337", "not read")
+let theHobbit = new Book("The Hobbit", "JRR Tolkien", "295", "Read")
+let endersGame = new Book("Ender's Game", "Orson Scott Card", "324", "Read")
+let bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", "337", "Not Read")
 
 addBookToLibrary(theHobbit)
 addBookToLibrary(endersGame)
 addBookToLibrary(bloodMeridian)
 
-let table = document.getElementById("bookTable");
 
-for (let i=0;i++;i<myLibrary.length) {
-    let row = table.insertRow(-1);
-    let cell = row.insertCell(0);
-    cell.innerHTML = myLibrary[i].info;
+
+function tableMaker() {
+    for (let i=0;i++;i<myLibrary.length) {
+        let table = document.getElementById("bookTable");
+        let row = table.insertRow();
+        let cell = row.insertCell();
+        let thisBook = myLibrary[i];
+        cell.innerHTML = thisBook.info();
+    }
 }
+//tableMaker()
+
+function tableTester() {
+    let table = document.getElementById("bookTable");
+    let row = table.insertRow();
+    let cell1 = row.insertCell();
+    let cell2 = row.insertCell();
+    let cell3 = row.insertCell();
+    let cell4 = row.insertCell();
+    let thisBook = myLibrary[0];
+    cell1.innerHTML = thisBook.title;
+    cell2.innerHTML = thisBook.author;
+    cell3.innerHTML = thisBook.pages;
+    cell4.innerHTML = thisBook.read;
+}
+tableTester();
