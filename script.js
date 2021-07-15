@@ -22,30 +22,19 @@ addBookToLibrary(theHobbit)
 addBookToLibrary(endersGame)
 addBookToLibrary(bloodMeridian)
 
-
-
 function tableMaker() {
-    for (let i=0;i++;i<myLibrary.length) {
+    for (let i=0;i<myLibrary.length;i++) {
         let table = document.getElementById("bookTable");
         let row = table.insertRow();
-        let cell = row.insertCell();
+        let cell1 = row.insertCell();
+        let cell2 = row.insertCell();
+        let cell3 = row.insertCell();
+        let cell4 = row.insertCell();
         let thisBook = myLibrary[i];
-        cell.innerHTML = thisBook.info();
-    }
+        cell1.innerHTML = thisBook.title;
+        cell2.innerHTML = thisBook.author;
+        cell3.innerHTML = thisBook.pages;
+        cell4.innerHTML = thisBook.read;
+    }    
 }
-//tableMaker()
-
-function tableTester() {
-    let table = document.getElementById("bookTable");
-    let row = table.insertRow();
-    let cell1 = row.insertCell();
-    let cell2 = row.insertCell();
-    let cell3 = row.insertCell();
-    let cell4 = row.insertCell();
-    let thisBook = myLibrary[0];
-    cell1.innerHTML = thisBook.title;
-    cell2.innerHTML = thisBook.author;
-    cell3.innerHTML = thisBook.pages;
-    cell4.innerHTML = thisBook.read;
-}
-tableTester();
+tableMaker();
