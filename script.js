@@ -32,11 +32,15 @@ function tableMaker() {
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
+        //let cell5 = row.insertCell();
+        let btn = document.createElement("BUTTON");
+        btn.innerText = "Remove Book"
         let thisBook = myLibrary[i];
-        cell1.innerHTML = thisBook.title;
-        cell2.innerHTML = thisBook.author;
-        cell3.innerHTML = thisBook.pages;
-        cell4.innerHTML = thisBook.read;
+        cell1.innerText = thisBook.title;
+        cell2.innerText = thisBook.author;
+        cell3.innerText = thisBook.pages;
+        cell4.innerText = thisBook.read;
+        row.appendChild(btn);
     }    
 }
 tableMaker();
@@ -56,10 +60,10 @@ function buttonClick() {
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
-        cell1.innerHTML = aNewBook.title;
-        cell2.innerHTML = aNewBook.author;
-        cell3.innerHTML = aNewBook.pages;
-        cell4.innerHTML = aNewBook.read;
+        cell1.innerText = aNewBook.title;
+        cell2.innerText = aNewBook.author;
+        cell3.innerText = aNewBook.pages;
+        cell4.innerText = aNewBook.read;
     }
 }
 buttonClick()
