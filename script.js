@@ -28,13 +28,15 @@ function tableMaker() {
     for (let i=0;i<myLibrary.length;i++) {
         let table = document.getElementById("bookTable");
         let row = table.insertRow();
+        row.setAttribute("ind", i);
         let cell1 = row.insertCell();
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
-        //let cell5 = row.insertCell();
         let btn = document.createElement("BUTTON");
-        btn.innerText = "Remove Book"
+        btn.setAttribute("index", i);
+        btn.innerText = "Remove Book";
+        btn.onclick = function() {removeBook(btn, i)};
         let thisBook = myLibrary[i];
         cell1.innerText = thisBook.title;
         cell2.innerText = thisBook.author;
@@ -44,7 +46,6 @@ function tableMaker() {
     }    
 }
 tableMaker();
-//TODO: add onclick function to add new books to library
 function buttonClick() {
     let button = document.getElementById("newBook")
     button.onclick = function() {
@@ -56,14 +57,27 @@ function buttonClick() {
         addBookToLibrary(aNewBook);
         let table = document.getElementById("bookTable");
         let row = table.insertRow();
+        let rowCount = table.tBodies[0].rows.length;
+        row.setAttribute("ind", rowCount);
         let cell1 = row.insertCell();
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
+        let btn = document.createElement("BUTTON");
+        btn.onclick = function() {removeBook(btn, rowCount)};
+        btn.innerText = "Remove Book"
         cell1.innerText = aNewBook.title;
         cell2.innerText = aNewBook.author;
         cell3.innerText = aNewBook.pages;
         cell4.innerText = aNewBook.read;
+        row.appendChild(btn);
     }
 }
 buttonClick()
+
+function removeBook(btn, i) {
+    let index = parseInt(btn.getAttribute('index'));
+    myLibrary.splice(index, 1);
+    let delRow = document.querySelector(`[ind='${i}']`);
+    delRow.remove();
+}
