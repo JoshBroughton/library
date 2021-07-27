@@ -1,5 +1,5 @@
 let myLibrary = [];
-
+//need to change to use object.create, and to use a boolean for read status
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
