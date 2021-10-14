@@ -74,6 +74,8 @@ function appendBookToTable(aNewBook) {
     }
     row.appendChild(btn);
 }
+//defines the DOM method executed for the add book button. Would like this
+//to pull up a form that restricts user input appropriately
 function addBookButton() {
     let button = document.getElementById("newBook")
     button.onclick = function() {
