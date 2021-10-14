@@ -1,5 +1,5 @@
 let myLibrary = [];
-//need to change to use object.create, and to use a boolean for read status
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -14,9 +14,9 @@ function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
 
-let theHobbit = new Book("The Hobbit", "JRR Tolkien", "295", "Read")
-let endersGame = new Book("Ender's Game", "Orson Scott Card", "324", "Read")
-let bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", "337", "Not Read")
+let theHobbit = new Book("The Hobbit", "JRR Tolkien", "295", false)
+let endersGame = new Book("Ender's Game", "Orson Scott Card", "324", true)
+let bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", "337", false)
 
 addBookToLibrary(theHobbit)
 addBookToLibrary(endersGame)
@@ -41,12 +41,40 @@ function tableMaker() {
         cell1.innerText = thisBook.title;
         cell2.innerText = thisBook.author;
         cell3.innerText = thisBook.pages;
-        cell4.innerText = thisBook.read;
+        if (thisBook.read === true) {
+            cell4.innerText = "Read";
+        } else {
+            cell4.innerText = "Not Read";
+        }
+        
         row.appendChild(btn);
     }    
 }
 tableMaker();
-function buttonClick() {
+//appends a new book object to the previously created table
+function appendBookToTable(aNewBook) {
+    let table = document.getElementById("bookTable");
+    let row = table.insertRow();
+    let rowCount = table.tBodies[0].rows.length;
+    row.setAttribute("ind", rowCount);
+    let cell1 = row.insertCell();
+    let cell2 = row.insertCell();
+    let cell3 = row.insertCell();
+    let cell4 = row.insertCell();
+    let btn = document.createElement("BUTTON");
+    btn.onclick = function() {removeBook(btn, rowCount)};
+    btn.innerText = "Remove Book"
+    cell1.innerText = aNewBook.title;
+    cell2.innerText = aNewBook.author;
+    cell3.innerText = aNewBook.pages;
+    if (aNewBook.read === true) {
+        cell4.innerText = "Read";
+    } else {
+         cell4.innerText = "Not Read";
+    }
+    row.appendChild(btn);
+}
+function addBookButton() {
     let button = document.getElementById("newBook")
     button.onclick = function() {
         let title = prompt("Enter the book title", "");
@@ -55,25 +83,10 @@ function buttonClick() {
         let read = prompt('Enter "Read" if you have read the book, or "Not Read" otherwise', "");
         let aNewBook = new Book(title, author, pages, read);
         addBookToLibrary(aNewBook);
-        let table = document.getElementById("bookTable");
-        let row = table.insertRow();
-        let rowCount = table.tBodies[0].rows.length;
-        row.setAttribute("ind", rowCount);
-        let cell1 = row.insertCell();
-        let cell2 = row.insertCell();
-        let cell3 = row.insertCell();
-        let cell4 = row.insertCell();
-        let btn = document.createElement("BUTTON");
-        btn.onclick = function() {removeBook(btn, rowCount)};
-        btn.innerText = "Remove Book"
-        cell1.innerText = aNewBook.title;
-        cell2.innerText = aNewBook.author;
-        cell3.innerText = aNewBook.pages;
-        cell4.innerText = aNewBook.read;
-        row.appendChild(btn);
+        appendBookToTable(aNewBook)
     }
 }
-buttonClick()
+addBookButton()
 
 function removeBook(btn, i) {
     let index = parseInt(btn.getAttribute('index'));
