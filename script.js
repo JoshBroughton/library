@@ -76,13 +76,31 @@ function appendBookToTable(aNewBook) {
 }
 //defines the DOM method executed for the add book button. Would like this
 //to pull up a form that restricts user input appropriately
+function openForm() {
+    document.getElementById("newBookForm").style.display = "block";
+}
+  
+function closeForm() {
+    document.getElementById("newBookForm").style.display = "none";
+}
+//does this work AND how do I acess these variables??
+function formInput() {
+    let form = document.getElementById("newBookForm");
+    form.addEventListener("submit", function(event) {
+        title = form.getElementById("title").value;
+        author = form.getElementById("author").value;
+        pages = form.getElementById("pages").value;
+        if (form.getElementById("read").checked) {
+            read = form.getElementById("read").value;
+        } else if (form.getElementById("not read").checked) {
+            read = form.getElementById("not read").value;
+        }
+    }
+} 
 function addBookButton() {
     let button = document.getElementById("newBook")
     button.onclick = function() {
-        let title = prompt("Enter the book title", "");
-        let author = prompt("Enter the author's name", "");
-        let pages = prompt("Enter the number of pages", "");
-        let read = prompt('Enter "Read" if you have read the book, or "Not Read" otherwise', "");
+        openForm()
         let aNewBook = new Book(title, author, pages, read);
         addBookToLibrary(aNewBook);
         appendBookToTable(aNewBook)
