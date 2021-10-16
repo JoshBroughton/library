@@ -98,9 +98,9 @@ function formSubmit() {
     let book = document.getElementById("title").value;
     let author = document.getElementById("author").value;
     let pages = document.getElementById("pages").value;
-    if (document.getElementById("read").value = "Read") {
+    if (document.getElementById("read").checked == true) {
         readStatus = true;
-    } else {
+    } else if (document.getElementById("notRead").checked == true) {
         readStatus = false;
     }
     let aNewBook = new Book(book, author, pages, readStatus);
