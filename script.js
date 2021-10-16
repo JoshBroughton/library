@@ -50,7 +50,7 @@ function tableMaker() {
         row.appendChild(btn);
     }    
 }
-tableMaker();
+tableMaker()
 //appends a new book object to the previously created table
 function appendBookToTable(aNewBook) {
     let table = document.getElementById("bookTable");
@@ -72,7 +72,7 @@ function appendBookToTable(aNewBook) {
     } else {
          cell4.innerText = "Not Read";
     }
-    row.appendChild(btn);
+    row.appendChild(btn)
 }
 //defines the DOM method executed for the add book button. Would like this
 //to pull up a form that restricts user input appropriately
@@ -82,31 +82,35 @@ function openForm() {
   
 function closeForm() {
     document.getElementById("newBookForm").style.display = "none";
+    document.getElementById("bookForm").reset();
 }
-//does this work AND how do I acess these variables??
-function formInput() {
-    let form = document.getElementById("newBookForm");
-    form.addEventListener("submit", function(event) {
-        title = form.getElementById("title").value;
-        author = form.getElementById("author").value;
-        pages = form.getElementById("pages").value;
-        if (form.getElementById("read").checked) {
-            read = form.getElementById("read").value;
-        } else if (form.getElementById("not read").checked) {
-            read = form.getElementById("not read").value;
-        }
-    }
-} 
+
+
+
 function addBookButton() {
-    let button = document.getElementById("newBook")
+    let button = document.getElementById("newBook");
     button.onclick = function() {
         openForm()
-        let aNewBook = new Book(title, author, pages, read);
-        addBookToLibrary(aNewBook);
-        appendBookToTable(aNewBook)
     }
 }
 addBookButton()
+function formSubmit() {
+    let book = document.getElementById("title").value;
+    let author = document.getElementById("author").value;
+    let pages = document.getElementById("pages").value;
+    if (document.getElementById("read").value = "Read") {
+        readStatus = true;
+    } else {
+        readStatus = false;
+    }
+    let aNewBook = new Book(book, author, pages, readStatus);
+    addBookToLibrary(aNewBook);
+    appendBookToTable(aNewBook);
+    closeForm();
+}
+
+let submitButton = document.getElementById("submitButton");
+submitButton.onclick = formSubmit;
 
 function removeBook(btn, i) {
     let index = parseInt(btn.getAttribute('index'));

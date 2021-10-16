@@ -12,25 +12,25 @@
         </table>
         <button type="button" id="newBook">Add Book</button>
         <div class="form-popup" id="newBookForm">
-            <form class="form-container">
+            <form class="form-container" id="bookForm">
                 <h1>Add A New Book</h1>
 
                 <label for="title"><b>Title</b></label>
-                <input type="text" placeholder="Enter Book Title" name="title" required>
+                <input type="text" placeholder="Enter Book Title" name="title" id="title" required>
 
                 <label for="author"><b>Author</b></label>
-                <input type="text" placeholder="Enter the Author's Name" name="author">
+                <input type="text" placeholder="Enter the Author's Name" id="author" name="author">
 
                 <label for="pages"><b>Pages</b></label>
-                <input type="number" placeholder="Number of Pages" name="pages" min="0">
+                <input type="number" placeholder="Number of Pages" id="pages" name="pages" min="0">
 
                 <label for="read"><b>Read</b></label>
-                <input type="radio" name="readStatus" id="read" value="Read">
+                <input type="radio" name="readStatus" id="read" value="Read" required>
 
                 <label for="not read"><b>Not Read</b></label>
-                <input type="radio" name="readStatus" id="not read" value="Not Read">
+                <input type="radio" name="readStatus" id="notRead" value="Not Read" required>
 
-                <button type="submit" clas="btn">Add Book</button>
+                <button type="button" id="submitButton" class="btn">Add Book</button>
                 <button type="button" class="btn cancel" onclick=closeForm()>Cancel</button>
             </form>
         </div>
