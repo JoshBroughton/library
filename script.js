@@ -22,14 +22,6 @@ addBookToLibrary(theHobbit)
 addBookToLibrary(endersGame)
 addBookToLibrary(bloodMeridian)
 
-//removes a book from the library
-function removeBook(btn, i) {
-    let index = parseInt(btn.getAttribute('index'));
-    myLibrary.splice(index, 1);
-    let delRow = document.querySelector(`[ind='${i}']`);
-    delRow.remove();
-}
-
 //function to create html table of book library. iterates
 //over library and inserts rows and cells with the info
 function tableMaker() {
@@ -127,6 +119,7 @@ function formSubmit() {
     addBookToLibrary(aNewBook);
     appendBookToTable(aNewBook);
     closeForm();
+    updateStorage();
 }
 //adding the DOM method to the button
 let submitButton = document.getElementById("submitButton");
@@ -138,4 +131,26 @@ function removeBook(btn, i) {
     myLibrary.splice(index, 1);
     let delRow = document.querySelector(`[ind='${i}']`);
     delRow.remove();
+    updateStorage();
 }
+
+//introducing data persistance using localStorage
+//first, test if there is data stored from previous session, and use this
+
+/*if (storage is populated) {
+    use that library
+    insert function method back into it??
+} else {
+    start with a blank library
+}*/
+
+//function that pushes the current library to localStorage
+//TODO: call it and convert back to proper aray of book objects
+function updateStorage () {
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+
+    let recoveredLib = localStorage.getItem('library');
+
+    console.log(JSON.parse(recoveredLib));
+}
+updateStorage();
