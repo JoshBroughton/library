@@ -22,6 +22,14 @@ addBookToLibrary(theHobbit)
 addBookToLibrary(endersGame)
 addBookToLibrary(bloodMeridian)
 
+//removes a book from the library
+function removeBook(btn, i) {
+    let index = parseInt(btn.getAttribute('index'));
+    myLibrary.splice(index, 1);
+    let delRow = document.querySelector(`[ind='${i}']`);
+    delRow.remove();
+}
+
 //function to create html table of book library. iterates
 //over library and inserts rows and cells with the info
 function tableMaker() {
@@ -33,9 +41,11 @@ function tableMaker() {
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
+        //create a "remove book" botton on each row
         let btn = document.createElement("BUTTON");
         btn.setAttribute("index", i);
         btn.innerText = "Remove Book";
+        //give the button a DOM method
         btn.onclick = function() {removeBook(btn, i)};
         let thisBook = myLibrary[i];
         cell1.innerText = thisBook.title;
@@ -46,7 +56,6 @@ function tableMaker() {
         } else {
             cell4.innerText = "Not Read";
         }
-        
         row.appendChild(btn);
     }    
 }
@@ -94,6 +103,8 @@ function addBookButton() {
     }
 }
 addBookButton()
+//function that defines what happens when new book form is submitted
+//TODO: Does it validate input properly? No
 function formSubmit() {
     let book = document.getElementById("title").value;
     let author = document.getElementById("author").value;
@@ -102,16 +113,26 @@ function formSubmit() {
         readStatus = true;
     } else if (document.getElementById("notRead").checked == true) {
         readStatus = false;
+        //false == "" is true apparently, so use some random other characters
+    } else if (document.getElementById("read").checked == false && document.getElementById("notRead").checked == false) {
+        readStatus = "LOL";
+    }
+    //rejects input if they leave anything blank
+    if (book == "" || author == "" || pages == "" || readStatus == "LOL") {
+        alert("Please complete all elements of the form!");
+        closeForm();
+        return;
     }
     let aNewBook = new Book(book, author, pages, readStatus);
     addBookToLibrary(aNewBook);
     appendBookToTable(aNewBook);
     closeForm();
 }
-
+//adding the DOM method to the button
 let submitButton = document.getElementById("submitButton");
 submitButton.onclick = formSubmit;
 
+//removes a book from the library
 function removeBook(btn, i) {
     let index = parseInt(btn.getAttribute('index'));
     myLibrary.splice(index, 1);
