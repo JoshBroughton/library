@@ -75,8 +75,8 @@ function appendBookToTable(aNewBook) {
     }
     row.appendChild(btn)
 }
-//defines the DOM method executed for the add book button. Would like this
-//to pull up a form that restricts user input appropriately
+//defines the DOM method executed for the add book button. Pulls up a form
+//for the user to fill out
 function openForm() {
     document.getElementById("newBookForm").style.display = "block";
 }
@@ -96,7 +96,6 @@ function addBookButton() {
 }
 addBookButton()
 //function that defines what happens when new book form is submitted
-//TODO: Does it validate input properly? No
 function formSubmit() {
     let book = document.getElementById("title").value;
     let author = document.getElementById("author").value;
@@ -146,7 +145,7 @@ function removeBook(btn, i) {
 
 //function that pushes the current library to localStorage
 //TODO: call it and convert back to proper aray of book objects
-function updateStorage () {
+function updateStorage() {
     localStorage.setItem('library', JSON.stringify(myLibrary));
 
     let recoveredLib = localStorage.getItem('library');
@@ -154,3 +153,6 @@ function updateStorage () {
     console.log(JSON.parse(recoveredLib));
 }
 updateStorage();
+function getFromStorage() {
+
+}
