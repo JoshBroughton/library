@@ -14,13 +14,25 @@ function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
 
-let theHobbit = new Book("The Hobbit", "JRR Tolkien", "295", false)
-let endersGame = new Book("Ender's Game", "Orson Scott Card", "324", true)
-let bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", "337", false)
+//function that pushes the current library to localStorage
+function updateStorage() {
+    localStorage.setItem('library', JSON.stringify(myLibrary));
 
-addBookToLibrary(theHobbit)
-addBookToLibrary(endersGame)
-addBookToLibrary(bloodMeridian)
+    let recoveredLib = localStorage.getItem('library');
+
+    console.log(JSON.parse(recoveredLib));
+}
+
+//function to check if localstorage is populated, and if so import the books
+function getFromStorage() {
+    if(!localStorage.getItem('library')) {
+        updateStorage();
+    } else {
+        myLibrary = JSON.parse(localStorage.getItem('library'));
+    }
+
+}
+getFromStorage();
 
 //function to create html table of book library. iterates
 //over library and inserts rows and cells with the info
@@ -143,16 +155,3 @@ function removeBook(btn, i) {
     start with a blank library
 }*/
 
-//function that pushes the current library to localStorage
-//TODO: call it and convert back to proper aray of book objects
-function updateStorage() {
-    localStorage.setItem('library', JSON.stringify(myLibrary));
-
-    let recoveredLib = localStorage.getItem('library');
-
-    console.log(JSON.parse(recoveredLib));
-}
-updateStorage();
-function getFromStorage() {
-
-}
